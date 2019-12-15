@@ -1,11 +1,11 @@
 {
-  "name": "@NPM_PACKAGE_SCOPE/NPM_PACKAGE_NAME",
+  "name": "@PROJECT_SCOPE/PROJECT_NAME",
   "version": "1.0.4",
   "description": "PROJECT_DESCRIPTION",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
-  "repository": "GIT_REPO",
+  "repository": "GIT_REPO_URL",
   "license": "MIT",
   "keywords": [],
   "scripts": {

@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
-import { double, power } from './NPM_PACKAGE_NAME';
+import { double, power } from './PROJECT_NAME';
 
 test('double', t => {
   t.is(double(2), 4);

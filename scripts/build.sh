@@ -10,50 +10,48 @@ set -o nounset
 
 
 echo -n "What's the project scope: "
-read -r NPM_PACKAGE_SCOPE
+read -r PROJECT_SCOPE
 
 echo -n "What's the project name: "
-read -r NPM_PACKAGE_NAME
+read -r PROJECT_NAME
 
 echo -n "What's the project description: "
 read -r PROJECT_DESCRIPTION
 
-echo -n "What's the git repository: "
-read -r GIT_REPO
+GIT_REPO_BASE_URL="https://github.com"
+GIT_REPO_USER="maspio"
+GIT_REPO_NAME="$PROJECT_SCOPE-$PROJECT_NAME"
+GIT_REPO_URL="$GIT_REPO_BASE_URL/$GIT_REPO_USER/$GIT_REPO_NAME"
 
-PROJECT_NAME="$NPM_PACKAGE_SCOPE-$NPM_PACKAGE_NAME"
 
-
-echo "NPM_PACKAGE_SCOPE=$NPM_PACKAGE_SCOPE"
-echo "NPM_PACKAGE_NAME=$NPM_PACKAGE_NAME"
-echo "PROJECT_DESCRIPTION=$PROJECT_DESCRIPTION"
+echo "PROJECT_SCOPE=$PROJECT_SCOPE"
 echo "PROJECT_NAME=$PROJECT_NAME"
-echo "GIT_REPO=$GIT_REPO"
+echo "PROJECT_DESCRIPTION=$PROJECT_DESCRIPTION"
+echo "GIT_REPO_USER=$GIT_REPO_USER"
+echo "GIT_REPO_NAME=$GIT_REPO_NAME"
+echo "GIT_REPO_URL=$GIT_REPO_URL"
 
 : "${BUILD_DIR:="./build"}"
-: "${BUILD_PROJECT_DIR:="${BUILD_DIR}/${PROJECT_NAME}"}"
+: "${BUILD_PROJECT_DIR:="${BUILD_DIR}/${GIT_REPO_NAME}"}"
 
 
 rm -rf "${BUILD_PROJECT_DIR}"
 mkdir -p "${BUILD_PROJECT_DIR}"
 cp -R "template/." "${BUILD_PROJECT_DIR}"
 
+readonly SED_PROJECT_SCOPE="s/PROJECT_SCOPE/${PROJECT_SCOPE}/g"
+readonly SED_PROJECT_NAME="s/PROJECT_NAME/${PROJECT_NAME}/g"
+readonly SED_PROJECT_DESCRIPTION="s/PROJECT_DESCRIPTION/${PROJECT_DESCRIPTION}/g"
+readonly SED_GIT_REPO_NAME="s/GIT_REPO_NAME/${GIT_REPO_NAME}/g"
+readonly SED_GIT_REPO_URL="s,GIT_REPO_URL,${GIT_REPO_URL},g"
+
+
 # find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 echo
 
-
-
-readonly SED_NPM_PACKAGE_SCOPE="s/NPM_PACKAGE_SCOPE/${NPM_PACKAGE_SCOPE}/g"
-readonly SED_NPM_PACKAGE_NAME="s/NPM_PACKAGE_NAME/${NPM_PACKAGE_NAME}/g"
-readonly SED_PROJECT_DESCRIPTION="s/PROJECT_DESCRIPTION/${PROJECT_DESCRIPTION}/g"
-readonly SED_PROJECT_NAME="s/PROJECT_NAME/${PROJECT_NAME}/g"
-readonly SED_GIT_REPO="s/GIT_REPO/${GIT_REPO}/g"
-
-
-
-find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_NPM_PACKAGE_SCOPE}"
-find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_NPM_PACKAGE_NAME}"
-find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_PROJECT_DESCRIPTION}"
+find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_PROJECT_SCOPE}"
 find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_PROJECT_NAME}"
-# find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_GIT_REPO}"
+find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_PROJECT_DESCRIPTION}"
+find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_GIT_REPO_NAME}"
+find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_GIT_REPO_URL}"
 
 
