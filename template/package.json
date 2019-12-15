@@ -33,7 +33,8 @@
     "version": "standard-version",
     "reset": "git clean -dfx && git reset --hard && yarn install",
     "clean": "trash build test",
-    "clean:full": "yarn clean && trash .nyc_output coverage node_modules",
+    "clean:full": "yarn clean && trash .nyc_output coverage",
+    "clean:full:node_modules": "yarn clean:full && trash node_modules",
     "prepare-release": "run-s reset test cov:check doc:html version doc:publish",
     "publish-release": "git push --follow-tags origin master && npm publish --access public"
   },

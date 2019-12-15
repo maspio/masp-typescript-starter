@@ -61,4 +61,5 @@ find "${BUILD_PROJECT_DIR}" -name 'PROJECT_NAME.*' -type f | while read line; do
 done
 
 yarn --cwd "${BUILD_PROJECT_DIR}" showoff
+yarn --cwd "${BUILD_PROJECT_DIR}" clean:full:node_modules
 

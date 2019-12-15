@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "clean": "trash build && yarn --cwd ./template clean:full",
+    "clean": "trash build && yarn --cwd ./template clean:full:node_modules",
     "prebuild": "yarn clean",
     "build": "scripty"
   },

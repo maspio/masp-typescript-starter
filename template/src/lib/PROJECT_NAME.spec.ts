@@ -5,6 +5,8 @@ import test from 'ava';
 import fs from 'fs';
 import path from 'path';
 
+import * as PROJECT_NAME from './PROJECT_NAME';
+
 const promiseFn = () => Promise.resolve(true);
 const delay = async (millis: number) => new Promise<void>(resolve => setTimeout(resolve, millis));
 
@@ -26,7 +28,7 @@ const delay = async (millis: number) => new Promise<void>(resolve => setTimeout(
 
 
 test('my passing test', t => {
-  t.pass();
+  t.is(PROJECT_NAME.double(3), 6);
 });
 
 test.serial('passes serially', t => {
