@@ -1,1 +1,1 @@
-export * from './lib/PROJECT_NAME';
+export * from './lib/NPM_PACKAGE_NAME';
