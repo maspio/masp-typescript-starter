@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - '12'
+# keep the yarn cache to speed up installs
+cache:
+  directories:
+    - '$HOME/.yarn'
+after_success:
+  - yarn cov:send
+  - yarn cov:check

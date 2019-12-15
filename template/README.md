@@ -1,0 +1,5 @@
+# @masp/PROJECT_NAME
+
+PROJECT_DESCRIPTION
+
+(git repository)[GIT_REPOSITORY]
