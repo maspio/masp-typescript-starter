@@ -13,7 +13,6 @@
     "build": "scripty"
   },
   "devDependencies": {
-    "cross-env": "^6.0.3",
     "scripty": "^1.9.1",
     "trash-cli": "^3.0.0"
   }
