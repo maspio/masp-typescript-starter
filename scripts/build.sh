@@ -54,4 +54,8 @@ find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_PROJECT_
 find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_GIT_REPO_NAME}"
 find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_GIT_REPO_URL}"
 
+#find "${BUILD_PROJECT_DIR}" -name 'PROJECT_NAME.*' -type f -print0 | xargs -0 echo
+find "${BUILD_PROJECT_DIR}" -name 'PROJECT_NAME.*' -type f -exec bash -c 'mv "$1" "${1//PROJECT_NAME/test}"' -- {} \;
+
+
 
