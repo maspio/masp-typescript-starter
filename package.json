@@ -8,11 +8,13 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "scripty",
-    "test": "cross-env PROJECT_NAME=test-project && yarn build"
+    "clean": "trash template/.nyc_output template/build template/node_modules template/test",
+    "prebuild": "yarn clean",
+    "build": "scripty"
   },
   "devDependencies": {
     "cross-env": "^6.0.3",
-    "scripty": "^1.9.1"
+    "scripty": "^1.9.1",
+    "trash-cli": "^3.0.0"
   }
 }

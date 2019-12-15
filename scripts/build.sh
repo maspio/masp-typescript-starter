@@ -7,8 +7,6 @@ set -o pipefail
 # Use set -o nounset (a.k.a. set -u) to exit when your script tries to use undeclared variables.
 set -o nounset
 
-
-
 echo -n "What's the project scope: "
 read -r PROJECT_SCOPE
 
@@ -34,7 +32,6 @@ echo "GIT_REPO_URL=$GIT_REPO_URL"
 : "${BUILD_DIR:="./build"}"
 : "${BUILD_PROJECT_DIR:="${BUILD_DIR}/${GIT_REPO_NAME}"}"
 
-
 rm -rf "${BUILD_PROJECT_DIR}"
 mkdir -p "${BUILD_PROJECT_DIR}"
 cp -R "template/." "${BUILD_PROJECT_DIR}"
@@ -55,7 +52,16 @@ find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_GIT_REPO
 find "${BUILD_PROJECT_DIR}" -type f -print0 | xargs -0 sed -i '' "${SED_GIT_REPO_URL}"
 
 #find "${BUILD_PROJECT_DIR}" -name 'PROJECT_NAME.*' -type f -print0 | xargs -0 echo
-find "${BUILD_PROJECT_DIR}" -name 'PROJECT_NAME.*' -type f -exec bash -c 'mv "$1" "${1//PROJECT_NAME/test}"' -- {} \;
+#find "${BUILD_PROJECT_DIR}" -name 'PROJECT_NAME.*' -type f -exec bash -c 'mv "$1" "${1/PROJECT_NAME/$PROJECT_NAME}"' -- {} \;
 
 
+find "${BUILD_PROJECT_DIR}" -name 'PROJECT_NAME.*' -type f | while read line; do
+ echo "${line}"
+ mv "$line" "${line/PROJECT_NAME/$PROJECT_NAME}"
+done
+
+yarn --cwd "${BUILD_PROJECT_DIR}" install
+yarn --cwd "${BUILD_PROJECT_DIR}" build
+yarn --cwd "${BUILD_PROJECT_DIR}" test
+yarn --cwd "${BUILD_PROJECT_DIR}" clean:full
 
