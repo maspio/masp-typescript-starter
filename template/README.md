@@ -2,4 +2,4 @@
 
 PROJECT_DESCRIPTION
 
-(git repo)[GIT_REPOSITORY]
+[github](GIT_REPO_URL)
