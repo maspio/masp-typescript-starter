@@ -9,6 +9,7 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
+    "showoff": "yarn install && yarn build && yarn test && yarn doc && yarn clean:full",
     "describe": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",
     "build:main": "tsc -p tsconfig.json",
@@ -32,7 +33,7 @@
     "version": "standard-version",
     "reset": "git clean -dfx && git reset --hard && yarn install",
     "clean": "trash build test",
-    "clean:full": "yarn clean && trash .nyc_output node_modules",
+    "clean:full": "yarn clean && trash .nyc_output coverage node_modules",
     "prepare-release": "run-s reset test cov:check doc:html version doc:publish",
     "publish-release": "git push --follow-tags origin master && npm publish --access public"
   },

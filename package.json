@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "clean": "trash template/.nyc_output template/build template/node_modules template/test",
+    "clean": "trash build && yarn --cwd ./template clean:full",
     "prebuild": "yarn clean",
     "build": "scripty"
   },

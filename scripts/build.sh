@@ -60,8 +60,5 @@ find "${BUILD_PROJECT_DIR}" -name 'PROJECT_NAME.*' -type f | while read line; do
  mv "$line" "${line/PROJECT_NAME/$PROJECT_NAME}"
 done
 
-yarn --cwd "${BUILD_PROJECT_DIR}" install
-yarn --cwd "${BUILD_PROJECT_DIR}" build
-yarn --cwd "${BUILD_PROJECT_DIR}" test
-yarn --cwd "${BUILD_PROJECT_DIR}" clean:full
+yarn --cwd "${BUILD_PROJECT_DIR}" showoff
 
